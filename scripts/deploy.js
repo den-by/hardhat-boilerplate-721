@@ -1,8 +1,7 @@
 const hre = require("hardhat");
 
 async function main() {
-
-  const latestBlock = await hre.ethers.provider.getBlock("latest")
+  const latestBlock = await hre.ethers.provider.getBlock("latest");
   //const add100BlocksToCurrent = latestBlock.timestamp + 1000;
 
   const BatchNFTs = await hre.ethers.getContractFactory("BatchNFTs");
