@@ -9,7 +9,9 @@
     "boilerplate",
     "ethereum",
     "solidity",
-    "starter"
+    "starter",
+    "ERC721",
+    "mumbai"
   ],
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.2",
