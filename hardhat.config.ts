@@ -1,42 +1,45 @@
-import { config } from "dotenv";
-import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import { config as dotenvConfig } from "dotenv";
+import type { HardhatUserConfig } from "hardhat/config";
+import "./tasks/accounts";
+import "./tasks/deploy";
+import assert from "node:assert";
 
+dotenvConfig();
+assert(process.env.MUMBAI_PRIVATE_KEY !== undefined);
 
-config();
-
-const privatekey = process.env.PRIVATE_KEY;
-const url = process.env.RPC_URL;
-
-if(!privatekey || !url) {
-    throw new Error("Please set your PRIVATE_KEY and RPC_URL in a .env file");
-}
-
-const hardhatUserConfig: HardhatUserConfig = {
-  solidity: {
-    version: "0.8.17",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200,
-      },
-    },
-  },
-  defaultNetwork: "mumbai",
+const config: HardhatUserConfig = {
+  defaultNetwork: "hardhat",
   networks: {
     hardhat: {},
     mumbai: {
-      url: url,
-      accounts: [privatekey],
+      url: "https://rpc-mumbai.maticvigil.com",
+      accounts: [process.env.MUMBAI_PRIVATE_KEY],
       gas: 2100000,
-      // gasPrice: 8000000000,
-      blockGasLimit: 100000000429720, // whatever you want here.
     },
-    // typechain: {
-    //   outDir: "typechain",
-    //   target: "ethers-v5",
-    // },
+  },
+  paths: {
+    artifacts: "./artifacts",
+    cache: "./cache",
+    sources: "./contracts",
+    tests: "./test",
+  },
+  solidity: {
+    version: "0.8.17",
+    settings: {
+      metadata: {
+        bytecodeHash: "none",
+      },
+      optimizer: {
+        enabled: true,
+        runs: 800,
+      },
+    },
+  },
+  typechain: {
+    outDir: "types",
+    target: "ethers-v5",
   },
 };
 
-export default hardhatUserConfig;
+export default config;
