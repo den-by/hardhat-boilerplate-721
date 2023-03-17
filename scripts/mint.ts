@@ -1,10 +1,14 @@
-const hre = require("hardhat");
-require("dotenv").config();
+import { ethers } from 'hardhat';
+import {config} from "dotenv";
 
 async function main() {
+  config();
   const contractAddress = process.env.CONTRACT_ADDRESS;
   const recieverAddress = process.env.RECIEVER_ADDRESS;
-  const myToken = await hre.ethers.getContractAt(
+  if(!contractAddress || !recieverAddress) {
+    throw new Error("CONTRACT_ADDRESS or RECIEVER_ADDRESS is not defined in .env file");
+  }
+  const myToken = await ethers.getContractAt(
     "MyToken",
     contractAddress
   );
