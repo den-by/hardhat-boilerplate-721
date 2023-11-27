@@ -1,8 +1,12 @@
 # Hardhat boilerplate 721
 
-This project is a boilerplate for creating NFTs on Polygon (Matic) network.
+## Overview
+This boilerplate is specifically designed for developers aiming to create and manage Non-Fungible Tokens (NFTs) on the Polygon (Matic) network. It provides a comprehensive setup for deploying and interacting with NFT smart contracts.
 
 ## Getting Started
+
+### Prerequisites
+- Ensure you have [Node.js](https://nodejs.org/) and npm installed on your system.
 
 ### Clone Project
 
